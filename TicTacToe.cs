@@ -57,13 +57,15 @@ namespace tictactoe
                     }
                 }
 
-                if (board.HasFullRow) {
+                if (board.HasFullRow)
+                {
                     board.Draw();
                     Console.WriteLine($"{PlayerName(activePlayer)} vann!");
                     break;
                 }
 
-                if (board.IsFull) {
+                if (board.IsFull)
+                {
                     Console.WriteLine("Det blev oavgjort.");
                     break;
                 }

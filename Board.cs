@@ -4,16 +4,16 @@ namespace tictactoe
 {
     struct Board
     {
-        Square[,] squares;
+        Symbol[,] symbols;
 
         public Board(Symbol initSymbol)
         {
-            squares = new Square[3, 3];
+            symbols = new Symbol[3, 3];
             for (int row = 0; row < 3; ++row)
             {
                 for (int col = 0; col < 3; ++col)
                 {
-                    squares[row, col].symbol = initSymbol;
+                    symbols[row, col] = initSymbol;
                 }
             }
         }
@@ -25,12 +25,12 @@ namespace tictactoe
 
         public bool IsBlank(int row, int col)
         {
-            return squares[row, col].symbol == Symbol.Blank;
+            return symbols[row, col] == Symbol.Blank;
         }
 
         public void Place(Symbol symbol, int row, int col)
         {
-            squares[row, col].symbol = symbol;
+            symbols[row, col] = symbol;
         }
 
         public bool IsFull
@@ -41,7 +41,7 @@ namespace tictactoe
                 {
                     for (int col = 0; col < 3; ++col)
                     {
-                        if (squares[row, col].symbol == Symbol.Blank)
+                        if (symbols[row, col] == Symbol.Blank)
                         {
                             return false;
                         }
@@ -87,11 +87,11 @@ namespace tictactoe
 
         private bool IsFullLine(int startRow, int startCol, int stepRow, int stepCol)
         {
-            return squares[startRow, startCol].symbol != Symbol.Blank &&
-                (squares[startRow, startCol].symbol ==
-                squares[startRow + stepRow, startCol + stepCol].symbol) &&
-                (squares[startRow, startCol].symbol ==
-                squares[startRow + stepRow * 2, startCol + stepCol * 2].symbol);
+            return symbols[startRow, startCol] != Symbol.Blank &&
+                (symbols[startRow, startCol] ==
+                symbols[startRow + stepRow, startCol + stepCol]) &&
+                (symbols[startRow, startCol] ==
+                symbols[startRow + stepRow * 2, startCol + stepCol * 2]);
         }
 
         public void Draw() {
@@ -100,7 +100,7 @@ namespace tictactoe
             for (int row = 0; row < 3; ++row) {
                 Console.Write($"{row + 1}|");
                 for (int col = 0; col < 3; ++col) {
-                    Console.Write(squares[row, col].symbol switch {
+                    Console.Write(symbols[row, col] switch {
                         Symbol.Circle => "O",
                         Symbol.Cross => "X",
                         _ => " ",
